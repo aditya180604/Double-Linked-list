@@ -1,0 +1,254 @@
+import java.util.*;
+public class DLL {    
+    class Node{    
+        int data;    
+        Node prev;    
+        Node next;    
+  
+        public Node(int data) {    
+            this.data = data; 
+            this.next = null;
+        }    
+    }    
+    Node head = null;  
+    Node tail = null;    
+
+   public void addNode(int data) {    
+      
+        Node newNode = new Node(data);    
+
+        if(head == null) 
+        {  
+            head = newNode;  
+            tail = newNode;   
+            head.prev = null;      
+            tail.next = null;    
+        } 
+        else 
+        {    
+            tail.next = newNode;   
+            newNode.prev = tail;     
+            tail = newNode;    
+            tail.next = null;    
+        }    
+    }    
+  
+    public void showData() {  
+        Node current = head;     
+        if(head == null) {   
+            System.out.println("List is empty");    
+            return;    
+        }   
+        System.out.println("output is ");     
+        while(current != null) {    
+            
+            System.out.print(current.data + " ");    
+            current = current.next;    
+        }    
+    } 
+    
+    public void addingatbeginning(int n) {        
+        Node newNode = new Node(n);    
+              
+        if(head == null)   
+        {     
+            head = newNode;  
+            tail = newNode;   
+            head.prev = null;      
+            tail.next = null;    
+        }     
+        else {    
+           
+            head.prev = newNode;    
+            newNode.next = head;    
+            newNode.prev = null;    
+            this.head = newNode;  
+            }  
+        }    
+        
+        public void addingatend(int n) {
+        	 Node newNode = new Node(n); 
+        if(head == null)   {}
+        else {  
+            tail.next = newNode;       
+            newNode.prev = tail;    
+            tail = newNode;        
+            tail.next = null;    
+        }    
+        }
+        public void addingatSpecificPosition() 
+        {    
+            Node newNode = new Node(0);       
+            if(head == null) {  
+                System.out.println("The specified location is not available");  
+            }  
+            else {  
+                int size = 0;
+				int position = 0;
+				if(position == size+1){  
+				}
+					else{  
+                       
+                    Node current = head;  
+                    Node temp = null;   
+                     
+                    for(int i = 1; i < position-1; i++){    
+                        current = current.next;    
+                    }        
+                    temp = current.next;    
+                    temp.prev = current;    
+          
+                    current.next = newNode;     
+                    newNode.prev = current;    
+                    newNode.next = temp;    
+                    temp.prev = newNode;    
+                }    
+                size++;  
+            }  
+        }   
+        
+        
+        
+        ///Deletion
+        
+        public void deletefirst() {  
+            if(head == null) {  
+                System.out.println("List is empty");  
+                return;  
+            }  
+            else {  
+                //testing for the presence of a single node in the list, If not, Then head and tail will be re-directed
+                if(head != tail) {  
+                    head = head.next;  
+                }  
+                //if only one node exist both head and tail will be redirected to null
+                else {  
+                    head = null;
+                    tail = null;  
+                }  
+            }  
+        }  
+        public void deleteLast() {  
+            if(head == null) {  
+                return;  
+            }  
+            else {  
+                if(head != tail) {  
+                    tail = tail.prev;  
+                    tail.next = null;  
+                }  
+                else {  
+                    head = tail = null;  
+                }  
+            }
+        }
+        public void deletionatmiddle() { 
+            if(head == null) {  
+                return;  
+            }  
+            else { 
+                Node current = head;  
+                int n = 0;
+				int pos =n;   
+                for(int i = 1; i < pos; i++){  
+                    current = current.next;  
+                }  
+                if(current == head) {  
+                    head = current.next;  
+                }  
+                else if(current == tail) {  
+                    tail = tail.prev;  
+                }  
+                else {  
+                    current.prev.next = current.next;  
+                    current.next.prev = current.prev;  
+                }  
+                //Delete the middle node  
+                current = null;  
+            }  
+        }  
+        void display() {  
+            Node curr = head;  
+            if(head == null) {  
+                System.out.println("List is empty");  
+                return;  
+            }
+            while(curr != null) 
+               {  
+                System.out.print(curr.data + " ");  
+                curr = curr.next;  
+                }  
+            System.out.println();  
+            }  
+        
+                
+	public static void main(String[] args) {    
+  
+        DLL obj = new DLL();    
+        Scanner k=new Scanner(System.in);
+        
+        while(true) {
+        	System.out.println("for adding elements: press 1");
+        	System.out.println("for adding at beginning: press 2");
+        	System.out.println("for adding at end: press 3");
+        	System.out.println("for adding at specified position: press 4");
+        	System.out.println("for deleting the element at first: press 5");
+        	System.out.println("for deleting the element at the end: press 6");
+        	System.out.println("for deleting the element at specified position: press 7");
+        	
+        	int choice=k.nextInt();
+        	if (choice==1) {
+        		System.out.println("Enter the data:");
+        		int d=k.nextInt();
+        		obj.addNode(d);
+        		
+        	}
+        	else if (choice==2) {
+        		System.out.println("Enter the data at beginnig: ");
+        		int d=k.nextInt();
+        		obj.addingatbeginning(d);
+        		
+        	}
+        	else if (choice==3) {
+        		System.out.println("Enter the data at end: ");
+        		int d=k.nextInt();
+        		
+        		obj.addingatend(d);
+        		
+        	}
+        	else if (choice==4) {
+        		System.out.println("Enter the data at specified : ");
+        		int d=k.nextInt();
+  
+        		obj.addingatSpecificPosition();
+        		
+        		
+        	}
+        	else if (choice==5) {
+        	    obj.deletefirst();
+        		
+        	}
+        	else if (choice==6) {
+        		System.out.println("Enter the data to be deleteatend: ");
+        		obj.deleteLast();
+        	}
+        	else if (choice==7) {
+        		System.out.println("Enter the data to be deleteatspecific: ");
+        		obj.deletionatmiddle();
+        	}
+        	else {
+        		break;
+        	}
+        }
+           
+        obj.showData();        
+	}
+	}
+
+
+
+ 
+	
+	
+
+	
